@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="L'Atelier M² — Menuiserie & Rénovation en Île-de-France. Devis gratuit. Tous budgets.">
+<title>L'Atelier M² — Menuiserie & Rénovation Île-de-France</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#0d0b08;--brun:#1a1108;--brun2:#2a1f0e;--or:#c8963c;--or2:#e8b45a;--or-soft:rgba(200,150,60,0.12);--creme:#f5f0e8;--creme2:#ede5d4;--blanc:#fdfaf5;--text:#2a1f0e;--text2:#6b5a3e;--border:rgba(200,150,60,0.2);--r:4px;--rl:12px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--blanc);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2rem;background:rgba(13,11,8,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,150,60,0.15);transition:padding .3s}
+.logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--or);text-decoration:none}
+.logo span{color:var(--creme)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(245,240,232,.7);text-decoration:none;font-size:.85rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--or)}
+.nav-cta{background:var(--or);color:var(--noir);padding:.6rem 1.4rem;border-radius:var(--r);font-size:.82rem;font-weight:600;text-decoration:none;letter-spacing:.04em;text-transform:uppercase;transition:all .2s;white-space:nowrap}
+.nav-cta:hover{background:var(--or2);transform:translateY(-1px)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.burger span{display:block;width:22px;height:2px;background:var(--creme);border-radius:2px}
+.hero{min-height:100vh;background:var(--brun);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(200,150,60,.08) 0%,transparent 70%)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--or-soft);border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-size:.75rem;font-weight:500;color:var(--or);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2rem;animation:fadeUp .8s ease both}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6.5rem);font-weight:900;color:var(--creme);line-height:1.05;letter-spacing:-.02em;margin-bottom:.5rem;animation:fadeUp .8s .1s ease both;position:relative;z-index:1}
+.hero h1 em{color:var(--or);font-style:normal}
+.hero-sub{font-family:'Playfair Display',serif;font-size:clamp(1rem,2.5vw,1.5rem);color:rgba(245,240,232,.5);letter-spacing:.15em;text-transform:uppercase;margin-bottom:2rem;animation:fadeUp .8s .2s ease both;position:relative;z-index:1}
+.hero-desc{max-width:580px;font-size:1.05rem;color:rgba(245,240,232,.65);line-height:1.7;margin-bottom:3rem;animation:fadeUp .8s .3s ease both;position:relative;z-index:1}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s .4s ease both;position:relative;z-index:1}
+.btn-primary{background:var(--or);color:var(--noir);padding:1rem 2.5rem;border-radius:var(--r);font-size:.9rem;font-weight:600;text-decoration:none;letter-spacing:.05em;text-transform:uppercase;transition:all .2s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--or2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,150,60,.35)}
+.btn-secondary{background:transparent;color:var(--creme);padding:1rem 2.5rem;border-radius:var(--r);font-size:.9rem;font-weight:500;text-decoration:none;letter-spacing:.05em;text-transform:uppercase;transition:all .2s;border:1px solid rgba(245,240,232,.25);display:inline-flex;align-items:center;gap:8px}
+.btn-secondary:hover{border-color:var(--or);color:var(--or)}
+.hero-stats{display:flex;gap:3rem;margin-top:4rem;animation:fadeUp .8s .5s ease both;position:relative;z-index:1}
+.stat{text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--or);display:block;line-height:1}
+.stat-label{font-size:.75rem;color:rgba(245,240,232,.45);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:rgba(245,240,232,.3);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;animation:bounce 2s infinite}
+.hero-scroll::after{content:'';width:1px;height:40px;background:linear-gradient(to bottom,rgba(200,150,60,.5),transparent)}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+section{padding:6rem 2rem}
+.container{max-width:1200px;margin:0 auto}
+.section-label{font-size:.72rem;font-weight:600;color:var(--or);letter-spacing:.15em;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.section-label::before,.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.section-label::before{max-width:40px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--text);line-height:1.2;margin-bottom:1.25rem}
+.section-desc{font-size:1rem;color:var(--text2);line-height:1.75;max-width:640px}
+#services{background:var(--creme2)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+.service-card{background:var(--blanc);border:1px solid var(--border);border-radius:var(--rl);padding:2rem;transition:all .3s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--or),var(--or2));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(26,17,8,.12)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-icon{width:52px;height:52px;background:var(--or-soft);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:1.25rem;border:1px solid var(--border)}
+.service-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.service-desc{font-size:.9rem;color:var(--text2);line-height:1.65}
+.service-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:1.25rem}
+.service-tag{font-size:.72rem;padding:3px 10px;border-radius:20px;background:var(--or-soft);color:var(--or);border:1px solid var(--border);font-weight:500}
+#realisations{background:var(--blanc)}
+.gallery-filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:2rem;margin-bottom:1.5rem}
+.filter-btn{padding:8px 18px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.82rem;font-weight:500;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.filter-btn.active{background:var(--or);color:var(--noir);border-color:var(--or)}
+.filter-btn:hover:not(.active){border-color:var(--or);color:var(--or)}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;min-height:200px}
+.gallery-card{position:relative;overflow:hidden;border-radius:var(--rl);background:var(--brun2);aspect-ratio:4/3;cursor:pointer;transition:all .3s;text-decoration:none;display:block}
+.gallery-card.wide{grid-column:span 2;aspect-ratio:16/9}
+.gallery-card.hidden{display:none}
+.gallery-img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.gallery-card:hover .gallery-img{transform:scale(1.05)}
+.gallery-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,var(--brun) 0%,var(--brun2) 100%);padding:1.5rem;text-align:center}
+.gallery-emoji{font-size:2.2rem}
+.gallery-cat-badge{font-size:.68rem;color:var(--or);text-transform:uppercase;letter-spacing:.1em;font-weight:600;background:rgba(200,150,60,.15);padding:3px 10px;border-radius:20px}
+.gallery-card-name{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--creme);font-weight:600}
+.gallery-card-loc{font-size:.75rem;color:rgba(245,240,232,.4)}
+.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,11,8,.9) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.25rem}
+.gallery-overlay-content{transform:translateY(8px);transition:transform .3s}
+.gallery-card:hover .gallery-overlay-content{transform:translateY(0)}
+.gallery-overlay-cat{font-size:.68rem;color:var(--or);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;font-weight:600}
+.gallery-overlay-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--creme);font-weight:600;margin-bottom:4px}
+.gallery-overlay-loc{font-size:.78rem;color:rgba(245,240,232,.55)}
+.gallery-overlay-cta{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:.75rem;color:var(--or);font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.gallery-loading{text-align:center;padding:3rem;color:var(--text2);font-size:.9rem}
+.gallery-empty{text-align:center;padding:3rem;color:var(--text2)}
+.gallery-empty p{margin-bottom:.5rem}
+.gallery-note{margin-top:1.5rem;padding:1rem 1.5rem;background:var(--or-soft);border:1px solid var(--border);border-radius:var(--r);font-size:.85rem;color:var(--text2);display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+#about{background:var(--brun);color:var(--creme)}
+#about .section-title{color:var(--creme)}
+#about .section-desc{color:rgba(245,240,232,.65)}
+#about .section-label{color:var(--or)}
+#about .section-label::before,#about .section-label::after{background:rgba(200,150,60,.25)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3rem}
+.about-features{display:flex;flex-direction:column;gap:1.25rem}
+.about-feature{display:flex;gap:1rem;align-items:flex-start;padding:1.25rem;background:rgba(200,150,60,.06);border:1px solid rgba(200,150,60,.15);border-radius:var(--rl);transition:all .2s}
+.about-feature:hover{background:rgba(200,150,60,.1)}
+.feature-icon{font-size:1.4rem;flex-shrink:0;width:44px;height:44px;background:rgba(200,150,60,.1);border-radius:var(--r);display:flex;align-items:center;justify-content:center}
+.feature-content h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:var(--or);margin-bottom:4px}
+.feature-content p{font-size:.875rem;color:rgba(245,240,232,.6);line-height:1.5}
+.about-team{display:flex;flex-direction:column;gap:1.5rem}
+.team-card{background:rgba(200,150,60,.06);border:1px solid rgba(200,150,60,.15);border-radius:var(--rl);padding:1.5rem;display:flex;gap:1.25rem;align-items:flex-start}
+.team-avatar{width:60px;height:60px;flex-shrink:0;background:linear-gradient(135deg,var(--or),var(--or2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;color:var(--noir);font-family:'Playfair Display',serif}
+.team-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:var(--creme);margin-bottom:2px}
+.team-role{font-size:.75rem;color:var(--or);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.team-bio{font-size:.85rem;color:rgba(245,240,232,.6);line-height:1.6}
+#zone{background:var(--creme2)}
+.zone-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-top:3rem}
+.zone-list{display:flex;flex-direction:column;gap:.75rem}
+.zone-item{display:flex;align-items:center;gap:10px;padding:.75rem 1rem;background:var(--blanc);border:1px solid var(--border);border-radius:var(--r);font-size:.875rem;font-weight:500;color:var(--text)}
+.zone-item::before{content:'📍';font-size:.85rem}
+.zone-note{padding:1rem 1.25rem;background:var(--or-soft);border-left:3px solid var(--or);border-radius:0 var(--r) var(--r) 0;font-size:.85rem;color:var(--text2);line-height:1.6;margin-top:1rem}
+.zone-visual{background:linear-gradient(135deg,var(--brun),var(--brun2));border-radius:var(--rl);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;font-size:4rem}
+#devis{background:var(--brun);color:var(--creme)}
+#devis .section-title{color:var(--creme)}
+#devis .section-desc{color:rgba(245,240,232,.6)}
+#devis .section-label{color:var(--or)}
+#devis .section-label::before,#devis .section-label::after{background:rgba(200,150,60,.25)}
+.devis-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3rem}
+.devis-promise{background:rgba(200,150,60,.08);border:1px solid rgba(200,150,60,.2);border-radius:var(--rl);padding:1.5rem;margin-bottom:1.5rem}
+.devis-promise h4{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--or);margin-bottom:.5rem}
+.devis-promise p{font-size:.875rem;color:rgba(245,240,232,.6);line-height:1.6}
+.contact-items{display:flex;flex-direction:column;gap:.875rem}
+.contact-item{display:flex;align-items:center;gap:12px;font-size:.9rem;color:rgba(245,240,232,.75)}
+.contact-icon{width:36px;height:36px;background:rgba(200,150,60,.1);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;border:1px solid rgba(200,150,60,.2)}
+.contact-item a{color:var(--or);text-decoration:none}
+.contact-lbl{font-size:.72rem;color:rgba(245,240,232,.4);display:block;margin-bottom:2px}
+.devis-form{background:rgba(255,255,255,.04);border:1px solid rgba(200,150,60,.15);border-radius:var(--rl);padding:2rem}
+.form-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--creme);margin-bottom:.5rem;font-weight:600}
+.form-subtitle{font-size:.82rem;color:rgba(245,240,232,.45);margin-bottom:1.5rem;line-height:1.5}
+.form-group{margin-bottom:1rem}
+.form-label{display:block;font-size:.72rem;font-weight:600;color:rgba(245,240,232,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+.form-input,.form-select,.form-textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(200,150,60,.2);border-radius:var(--r);padding:.8rem 1rem;color:var(--creme);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--or)}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(245,240,232,.25)}
+.form-select option{background:var(--brun);color:var(--creme)}
+.form-textarea{resize:vertical;min-height:100px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.875rem}
+.form-photo-hint{background:rgba(200,150,60,.08);border:1px solid rgba(200,150,60,.2);border-radius:var(--r);padding:.875rem 1rem;font-size:.8rem;color:rgba(245,240,232,.6);line-height:1.55;margin-bottom:1rem;display:flex;gap:10px;align-items:flex-start}
+.form-submit{width:100%;margin-top:.5rem;background:var(--or);color:var(--noir);border:none;border-radius:var(--r);padding:1rem;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.form-submit:hover{background:var(--or2);transform:translateY(-1px)}
+.form-note{font-size:.72rem;color:rgba(245,240,232,.35);text-align:center;margin-top:.75rem;line-height:1.5}
+.form-success{display:none;text-align:center;padding:2rem}
+.s-icon{font-size:3rem;margin-bottom:1rem}
+.form-success h4{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--or);margin-bottom:.5rem}
+.form-success p{font-size:.875rem;color:rgba(245,240,232,.6);line-height:1.6}
+footer{background:var(--noir);padding:3rem 2rem 2rem;border-top:1px solid rgba(200,150,60,.1)}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--or);margin-bottom:.75rem}
+.footer-p{font-size:.85rem;color:rgba(245,240,232,.4);line-height:1.6;max-width:280px}
+.footer-col h5{font-size:.72rem;font-weight:600;color:var(--or);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col ul li a{font-size:.85rem;color:rgba(245,240,232,.4);text-decoration:none;transition:color .2s}
+.footer-col ul li a:hover{color:var(--or)}
+.footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(200,150,60,.08);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{font-size:.78rem;color:rgba(245,240,232,.25)}
+.social-links{display:flex;gap:10px;margin-top:1.25rem}
+.social-link{width:36px;height:36px;background:rgba(200,150,60,.08);border:1px solid rgba(200,150,60,.15);border-radius:var(--r);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.9rem;transition:all .2s;color:rgba(245,240,232,.4)}
+.social-link:hover{background:rgba(200,150,60,.15);border-color:var(--or);color:var(--or)}
+.wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:99;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,.4);animation:waF 3s ease-in-out infinite}
+@keyframes waF{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:99;background:rgba(13,11,8,.97);backdrop-filter:blur(12px);flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:600;color:var(--creme);text-decoration:none}
+.mobile-menu a:hover{color:var(--or)}
+.mobile-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(--creme);font-size:1.5rem;cursor:pointer}
+.reveal{opacity:0;transform:translateY(28px);transition:all .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.nav-links,.nav-cta{display:none}.burger{display:flex}.about-grid,.devis-layout,.zone-grid,.footer-inner{grid-template-columns:1fr}.gallery-grid{grid-template-columns:1fr 1fr}.gallery-card.wide{grid-column:span 2}.form-grid{grid-template-columns:1fr}.hero-stats{gap:1.5rem}}
+@media(max-width:600px){nav{padding:1rem 1.25rem}section{padding:4rem 1.25rem}.gallery-grid{grid-template-columns:1fr}.gallery-card.wide{grid-column:span 1;aspect-ratio:4/3}.hero-stats{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+
+<a href="https://wa.me/33627650396?text=Bonjour%20L'Atelier%20M²%2C%20je%20souhaite%20un%20devis." class="wa-float" target="_blank" aria-label="WhatsApp">💬</a>
+
+<div class="mobile-menu" id="mob">
+  <button class="mobile-close" onclick="closeMob()">✕</button>
+  <a href="#services" onclick="closeMob()">Nos services</a>
+  <a href="#realisations" onclick="closeMob()">Réalisations</a>
+  <a href="#about" onclick="closeMob()">L'équipe</a>
+  <a href="#zone" onclick="closeMob()">Zone</a>
+  <a href="#devis" onclick="closeMob()">Devis gratuit</a>
+</div>
+
+<nav id="nav">
+  <a href="#" class="logo">L'Atelier <span>M²</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#realisations">Réalisations</a></li>
+    <li><a href="#about">L'équipe</a></li>
+    <li><a href="#zone">Zone</a></li>
+  </ul>
+  <a href="#devis" class="nav-cta">Devis gratuit</a>
+  <button class="burger" onclick="openMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">✦ Menuiserie & Rénovation · Île-de-France</div>
+  <h1>L'art de<br>façonner <em>votre</em><br>espace</h1>
+  <p class="hero-sub">L'Atelier M² · Artisans BTP</p>
+  <p class="hero-desc">Menuiserie sur mesure et rénovation complète en Île-de-France. Des solutions adaptées à tous les budgets, réalisées avec le savoir-faire de l'artisan et la rigueur du professionnel.</p>
+  <div class="hero-actions">
+    <a href="#devis" class="btn-primary">Devis gratuit ✦</a>
+    <a href="#realisations" class="btn-secondary">Voir nos réalisations</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">15+</span><span class="stat-label">Ans d'expertise</span></div>
+    <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Travail garanti</span></div>
+    <div class="stat"><span class="stat-num">Tous</span><span class="stat-label">Les budgets</span></div>
+  </div>
+  <div class="hero-scroll">Découvrir</div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-label">Ce que nous faisons</div>
+    <h2 class="section-title">Nos expertises</h2>
+    <p class="section-desc">De la menuiserie sur mesure à la rénovation complète, nous intervenons avec le même niveau d'exigence — et des solutions adaptées à votre budget.</p>
+    <div class="services-grid">
+      <div class="service-card reveal"><div class="service-icon">🪵</div><h3 class="service-title">Menuiserie intérieure</h3><p class="service-desc">Portes, placards, escaliers, parquets et agencements sur mesure. Chaque pièce est conçue et posée avec précision pour s'intégrer parfaitement à votre espace et votre budget.</p><div class="service-tags"><span class="service-tag">Portes</span><span class="service-tag">Placards</span><span class="service-tag">Parquets</span><span class="service-tag">Sur mesure</span></div></div>
+      <div class="service-card reveal"><div class="service-icon">🚪</div><h3 class="service-title">Menuiserie extérieure</h3><p class="service-desc">Portails, terrasses, bardages, volets et clôtures. Nous sélectionnons les matériaux adaptés à votre projet et à vos contraintes budgétaires.</p><div class="service-tags"><span class="service-tag">Portails</span><span class="service-tag">Terrasses</span><span class="service-tag">Volets</span><span class="service-tag">Bardages</span></div></div>
+      <div class="service-card reveal"><div class="service-icon">🏗️</div><h3 class="service-title">Rénovation complète</h3><p class="service-desc">Coordination de tous les corps de métier : menuiserie, peinture, plâtrerie, isolation, carrelage. Un interlocuteur unique de l'étude à la livraison, clé en main.</p><div class="service-tags"><span class="service-tag">Tous corps d'état</span><span class="service-tag">Peinture</span><span class="service-tag">Isolation</span><span class="service-tag">Clé en main</span></div></div>
+      <div class="service-card reveal"><div class="service-icon">🏢</div><h3 class="service-title">Locaux professionnels</h3><p class="service-desc">Aménagement de bureaux, commerces et espaces professionnels. Nous accompagnons les promoteurs et marchands de biens pour des projets d'envergure.</p><div class="service-tags"><span class="service-tag">Bureaux</span><span class="service-tag">Commerces</span><span class="service-tag">Promoteurs</span></div></div>
+      <div class="service-card reveal"><div class="service-icon">📐</div><h3 class="service-title">Conseil & conception</h3><p class="service-desc">Étude de faisabilité, plans et conseils techniques avant chantier. Nous optimisons votre projet selon vos objectifs et votre budget dès la première rencontre.</p><div class="service-tags"><span class="service-tag">Étude</span><span class="service-tag">Plans</span><span class="service-tag">Conseil</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="realisations">
+  <div class="container">
+    <div class="section-label">Notre portfolio</div>
+    <h2 class="section-title">Nos réalisations</h2>
+    <p class="section-desc">Découvrez nos chantiers réalisés. Cliquez sur une réalisation pour voir toutes les photos.</p>
+    <div class="gallery-filters" id="galleryFilters">
+      <button class="filter-btn active" onclick="filterGallery('all',this)">Toutes les réalisations</button>
+      <button class="filter-btn" onclick="filterGallery('mint',this)">Menuiserie intérieure</button>
+      <button class="filter-btn" onclick="filterGallery('mext',this)">Menuiserie extérieure</button>
+      <button class="filter-btn" onclick="filterGallery('renov',this)">Rénovation</button>
+      <button class="filter-btn" onclick="filterGallery('pro',this)">Locaux pro</button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-loading">Chargement des réalisations...</div>
+    </div>
+    <div class="gallery-note reveal" id="galleryNote" style="display:none">
+      📸 Pour ajouter un nouveau chantier : uploadez vos photos dans le bon dossier sur GitHub, puis ajoutez une entrée dans <strong>galerie.json</strong>.
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-label">L'équipe</div>
+    <h2 class="section-title">Deux associés,<br>une vision commune</h2>
+    <p class="section-desc">L'Atelier M² réunit un artisan menuisier d'exception et un entrepreneur aguerri. Expertise technique et rigueur de gestion au service de votre projet.</p>
+    <div class="about-grid">
+      <div class="about-features reveal">
+        <div class="about-feature"><div class="feature-icon">🏅</div><div class="feature-content"><h4>Savoir-faire artisanal</h4><p>Plus de 15 ans de pratique au service de la qualité. Chaque geste compte, chaque détail est soigné, quel que soit votre budget.</p></div></div>
+        <div class="about-feature"><div class="feature-icon">📋</div><div class="feature-content"><h4>Rigueur professionnelle</h4><p>Devis précis, respect des délais, suivi de chantier transparent. Vous êtes informé à chaque étape de votre projet.</p></div></div>
+        <div class="about-feature"><div class="feature-icon">🤝</div><div class="feature-content"><h4>Relation de confiance</h4><p>Un interlocuteur unique pour votre projet. Nous construisons des relations durables basées sur la transparence et le résultat.</p></div></div>
+        <div class="about-feature"><div class="feature-icon">✅</div><div class="feature-content"><h4>Travail garanti</h4><p>Nous garantissons la qualité de chaque réalisation. Votre satisfaction est notre priorité, nous assumons nos engagements.</p></div></div>
+      </div>
+      <div class="about-team reveal">
+        <div class="team-card">
+          <div class="team-avatar">JM</div>
+          <div><p class="team-name">Jaime Marchena Laguna</p><p class="team-role">Maître artisan · Direction technique</p><p class="team-bio">Menuisier avec plus de 15 ans d'expérience sur des chantiers variés en Île-de-France — du particulier aux espaces professionnels. Reconnu pour la précision de son travail et son exigence sur chaque réalisation.</p></div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">FL</div>
+          <div><p class="team-name">Fernando Lino Mayer</p><p class="team-role">Gérant · Direction administrative & commerciale</p><p class="team-bio">Consultant en informatique depuis 25 ans, spécialisé dans le pilotage de projets complexes. Entrepreneur, Fernando développe en parallèle son activité de marchand de biens. Il apporte à L'Atelier M² rigueur de gestion et vision stratégique.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="zone">
+  <div class="container">
+    <div class="section-label">Où nous intervenons</div>
+    <h2 class="section-title">Zone d'intervention</h2>
+    <p class="section-desc">Basés en Île-de-France, nous intervenons sur toute la région parisienne. Des déplacements en province sont possibles pour des projets d'envergure.</p>
+    <div class="zone-grid">
+      <div>
+        <div class="zone-list">
+          <div class="zone-item reveal">Paris — tous arrondissements</div>
+          <div class="zone-item reveal">Hauts-de-Seine (92)</div>
+          <div class="zone-item reveal">Val-de-Marne (94)</div>
+          <div class="zone-item reveal">Seine-Saint-Denis (93)</div>
+          <div class="zone-item reveal">Yvelines (78)</div>
+          <div class="zone-item reveal">Essonne (91)</div>
+          <div class="zone-item reveal">Val-d'Oise (95)</div>
+          <div class="zone-item reveal">Seine-et-Marne (77)</div>
+        </div>
+        <div class="zone-note reveal">Nous nous déplaçons en province pour des projets de rénovation complète ou pour nos partenaires marchands de biens.</div>
+      </div>
+      <div class="zone-visual reveal"><span>🗺️</span><span style="font-size:1rem;color:rgba(245,240,232,.6);font-family:'Playfair Display',serif">Île-de-France</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="devis">
+  <div class="container">
+    <div class="section-label">Commencer votre projet</div>
+    <h2 class="section-title">Devis gratuit<br>& sans engagement</h2>
+    <p class="section-desc">Décrivez votre projet — nous vous recontactons rapidement. Pour les projets complexes, nous vous rappelons pour affiner l'estimation ensemble.</p>
+    <div class="devis-layout">
+      <div class="reveal">
+        <div class="devis-promise">
+          <h4>Notre engagement</h4>
+          <p>Réponse rapide selon la complexité du projet. Pour les projets importants, nous vous <strong style="color:var(--or)">rappelons pour mieux cerner vos besoins</strong> et vous proposer une estimation précise et adaptée à votre budget.</p>
+        </div>
+        <div class="contact-items">
+          <div class="contact-item"><div class="contact-icon">📞</div><div><span class="contact-lbl">Téléphone</span><a href="tel:+33627650396">06 27 65 03 96</a></div></div>
+          <div class="contact-item"><div class="contact-icon">💬</div><div><span class="contact-lbl">WhatsApp — envoyez vos photos ici</span><a href="https://wa.me/33627650396">Message + photos directement</a></div></div>
+          <div class="contact-item"><div class="contact-icon">📧</div><div><span class="contact-lbl">Email</span><a href="mailto:contact@atelier-m2.fr">contact@atelier-m2.fr</a></div></div>
+          <div class="contact-item"><div class="contact-icon">📍</div><div><span class="contact-lbl">Zone</span><span style="color:rgba(245,240,232,.6)">Île-de-France & Province</span></div></div>
+        </div>
+      </div>
+      <div class="devis-form reveal">
+        <div id="formContent">
+          <p class="form-title">Demande de devis gratuit</p>
+          <p class="form-subtitle">Après envoi, WhatsApp s'ouvre — envoyez-y vos photos et plans pour un devis plus précis.</p>
+          <div class="form-grid">
+            <div class="form-group"><label class="form-label">Prénom *</label><input type="text" class="form-input" placeholder="Votre prénom" id="f-prenom"></div>
+            <div class="form-group"><label class="form-label">Nom *</label><input type="text" class="form-input" placeholder="Votre nom" id="f-nom"></div>
+          </div>
+          <div class="form-group"><label class="form-label">Téléphone * — nous vous rappellerons</label><input type="tel" class="form-input" placeholder="06 00 00 00 00" id="f-tel"></div>
+          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="votre@email.fr" id="f-email"></div>
+          <div class="form-group"><label class="form-label">Type de travaux *</label>
+            <select class="form-select" id="f-type">
+              <option value="">Sélectionner...</option>
+              <option>Menuiserie intérieure</option>
+              <option>Menuiserie extérieure</option>
+              <option>Rénovation complète</option>
+              <option>Aménagement professionnel</option>
+              <option>Conseil & conception</option>
+              <option>Autre / Je ne sais pas encore</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Ville / Code postal *</label><input type="text" class="form-input" placeholder="Paris, 75015" id="f-ville"></div>
+          <div class="form-group"><label class="form-label">Budget approximatif</label>
+            <select class="form-select" id="f-budget">
+              <option value="">Sélectionner...</option>
+              <option>Moins de 5 000 €</option>
+              <option>5 000 € – 15 000 €</option>
+              <option>15 000 € – 50 000 €</option>
+              <option>Plus de 50 000 €</option>
+              <option>Je ne sais pas encore</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Description du projet</label><textarea class="form-textarea" placeholder="Décrivez votre projet : surface, travaux souhaités, délai..." id="f-desc"></textarea></div>
+          <div class="form-photo-hint">📸 Après envoi, vous pourrez joindre vos photos, plans et documents directement dans la conversation WhatsApp pour un devis plus précis.</div>
+          <button class="form-submit" onclick="submitForm()">Envoyer ma demande ✦</button>
+          <p class="form-note">Devis gratuit · Sans engagement · Nous vous rappelons si nécessaire</p>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="s-icon">✅</div>
+          <h4>Demande reçue !</h4>
+          <p>Merci pour votre confiance. <strong>WhatsApp vient de s'ouvrir</strong> — envoyez-y vos photos et plans pour un devis plus précis.</p>
+          <p style="margin-top:1rem">Nous vous recontactons très rapidement.</p>
+          <p style="margin-top:.75rem;color:var(--or)">L'équipe L'Atelier M²</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">L'Atelier M²</div>
+      <p class="footer-p">Menuiserie & Rénovation en Île-de-France. Des solutions adaptées à tous les budgets, réalisées avec passion et rigueur.</p>
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="Instagram">📸</a>
+        <a href="#" class="social-link" aria-label="Facebook">👥</a>
+        <a href="#" class="social-link" aria-label="TikTok">🎵</a>
+        <a href="#" class="social-link" aria-label="LinkedIn">💼</a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Services</h5><ul><li><a href="#services">Menuiserie intérieure</a></li><li><a href="#services">Menuiserie extérieure</a></li><li><a href="#services">Rénovation complète</a></li><li><a href="#services">Locaux professionnels</a></li><li><a href="#services">Conseil & conception</a></li></ul></div>
+    <div class="footer-col"><h5>Contact</h5><ul><li><a href="tel:+33627650396">06 27 65 03 96</a></li><li><a href="https://wa.me/33627650396">WhatsApp</a></li><li><a href="mailto:contact@atelier-m2.fr">contact@atelier-m2.fr</a></li><li><a href="#devis">Demander un devis</a></li><li><a href="#zone">Zone d'intervention</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 L'Atelier M² — Menuiserie & Rénovation · Île-de-France</p>
+    <p>Tous droits réservés</p>
+  </div>
+</footer>
+
+<script>
+// ── CATÉGORIES
+const CAT_LABELS = {mint:'Menuiserie intérieure', mext:'Menuiserie extérieure', renov:'Rénovation complète', pro:'Local professionnel'};
+const CAT_EMOJIS = {mint:'🪵', mext:'🚪', renov:'🏗️', pro:'🏢'};
+
+// ── CHARGEMENT DYNAMIQUE depuis galerie.json
+let allChantiers = [];
+let currentFilter = 'all';
+
+async function loadGalerie() {
+  const grid = document.getElementById('galleryGrid');
+  try {
+    const res = await fetch('galerie.json?v=' + Date.now());
+    if (!res.ok) throw new Error('galerie.json introuvable');
+    const data = await res.json();
+    allChantiers = data.chantiers || [];
+    renderGallery();
+    document.getElementById('galleryNote').style.display = 'flex';
+  } catch(e) {
+    grid.innerHTML = '<div class="gallery-empty"><p>⚠️ Impossible de charger galerie.json</p><p style="font-size:.8rem;margin-top:.5rem">Vérifiez que galerie.json est bien uploadé sur GitHub.</p></div>';
+  }
+}
+
+function renderGallery() {
+  const grid = document.getElementById('galleryGrid');
+  grid.innerHTML = '';
+
+  const visible = currentFilter === 'all'
+    ? allChantiers
+    : allChantiers.filter(c => c.cat === currentFilter);
+
+  if (visible.length === 0) {
+    grid.innerHTML = '<div class="gallery-empty"><p>Aucune réalisation dans cette catégorie pour l\'instant.</p></div>';
+    return;
+  }
+
+  visible.forEach((c, i) => {
+    const card = document.createElement('a');
+    card.className = 'gallery-card' + (i === 0 ? ' wide' : '');
+    card.dataset.cat = c.cat;
+
+    // Construire l'URL de la page chantier
+    const photosUrls = (c.photos || []).map(p => c.dossier + p).join(',');
+    const params = new URLSearchParams({
+      id: c.id,
+      titre: c.titre,
+      lieu: c.lieu,
+      cat: CAT_LABELS[c.cat] || c.cat,
+      desc: c.desc || '',
+      photos: photosUrls,
+      dossier: c.dossier || ''
+    });
+    card.href = 'chantier.html?' + params.toString();
+
+    // Cover photo ou placeholder
+    const hasCover = c.cover || (c.photos && c.photos.length > 0);
+    const coverSrc = c.cover || (c.dossier + (c.photos && c.photos[0]));
+
+    if (hasCover) {
+      card.innerHTML = `
+        <img class="gallery-img" src="${coverSrc}"
+             alt="${c.titre}"
+             loading="${i === 0 ? 'eager' : 'lazy'}"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="gallery-placeholder" style="display:none">
+          <span class="gallery-emoji">${CAT_EMOJIS[c.cat]||'🏗️'}</span>
+          <span class="gallery-cat-badge">${CAT_LABELS[c.cat]||c.cat}</span>
+          <span class="gallery-card-name">${c.titre}</span>
+          <span class="gallery-card-loc">📍 ${c.lieu}</span>
+        </div>
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-content">
+            <p class="gallery-overlay-cat">${CAT_LABELS[c.cat]||c.cat}</p>
+            <p class="gallery-overlay-title">${c.titre}</p>
+            <p class="gallery-overlay-loc">📍 ${c.lieu}</p>
+            <span class="gallery-overlay-cta">Voir les ${c.photos ? c.photos.length : ''} photos →</span>
+          </div>
+        </div>`;
+    } else {
+      card.innerHTML = `
+        <div class="gallery-placeholder">
+          <span class="gallery-emoji">${CAT_EMOJIS[c.cat]||'🏗️'}</span>
+          <span class="gallery-cat-badge">${CAT_LABELS[c.cat]||c.cat}</span>
+          <span class="gallery-card-name">${c.titre}</span>
+          <span class="gallery-card-loc">📍 ${c.lieu}</span>
+        </div>
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-content">
+            <p class="gallery-overlay-cat">${CAT_LABELS[c.cat]||c.cat}</p>
+            <p class="gallery-overlay-title">${c.titre}</p>
+            <p class="gallery-overlay-loc">📍 ${c.lieu}</p>
+            <span class="gallery-overlay-cta">Voir les photos →</span>
+          </div>
+        </div>`;
+    }
+
+    grid.appendChild(card);
+    // Scroll reveal
+    setTimeout(() => card.classList.add('reveal'), 10);
+    setTimeout(() => {
+      const obs = new IntersectionObserver(es => {
+        es.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)} })
+      }, {threshold:.1});
+      obs.observe(card);
+    }, 50);
+  });
+}
+
+function filterGallery(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = cat;
+  renderGallery();
+}
+
+// ── MOBILE MENU
+function openMob(){document.getElementById('mob').classList.add('open');document.body.style.overflow='hidden'}
+function closeMob(){document.getElementById('mob').classList.remove('open');document.body.style.overflow=''}
+
+// ── NAV SCROLL
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').style.padding = window.scrollY > 50 ? '.875rem 2rem' : '1.25rem 2rem'
+});
+
+// ── SCROLL REVEAL
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)} })
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── FORMULAIRE
+function submitForm(){
+  const prenom = document.getElementById('f-prenom').value.trim();
+  const tel    = document.getElementById('f-tel').value.trim();
+  const type   = document.getElementById('f-type').value;
+  const ville  = document.getElementById('f-ville').value.trim();
+  if(!prenom||!tel||!type||!ville){alert('Merci de remplir les champs obligatoires (*)');return}
+  const nom    = document.getElementById('f-nom').value.trim();
+  const email  = document.getElementById('f-email').value.trim();
+  const budget = document.getElementById('f-budget').value;
+  const desc   = document.getElementById('f-desc').value.trim();
+  const msg = encodeURIComponent(
+    "Bonjour L'Atelier M², je souhaite un devis.\n\n" +
+    "Nom : " + prenom + " " + nom + "\n" +
+    "Tél : " + tel + (email ? "\nEmail : " + email : "") + "\n" +
+    "Type : " + type + "\nVille : " + ville +
+    (budget ? "\nBudget : " + budget : "") +
+    (desc ? "\n\nDétails : " + desc : "") +
+    "\n\nJe peux vous envoyer des photos dans cette conversation."
+  );
+  document.getElementById('formContent').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+  setTimeout(() => window.open('https://wa.me/33627650396?text=' + msg, '_blank'), 800);
+}
+
+// ── SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  })
+});
+
+// ── INIT
+loadGalerie();
+</script>
+</body>
+</html>

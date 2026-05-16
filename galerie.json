@@ -1,0 +1,25 @@
+{
+  "chantiers": [
+    {
+      "id": "renov-lucsurmer-t5",
+      "titre": "Rénovation T5",
+      "lieu": "Luc-sur-Mer",
+      "cat": "renov",
+      "desc": "Rénovation complète d'un T5 — travaux de menuiserie, second œuvre et finitions.",
+      "cover": "photos/renov/lucsurmer-t5/renov-lucsurmer-t5-apres-cover.jpg",
+      "dossier": "photos/renov/lucsurmer-t5/",
+      "photos": [
+        "renov-lucsurmer-t5-apres-cover.jpg",
+        "renov-lucsurmer-t5-apres-01.jpg",
+        "renov-lucsurmer-t5-apres-02.jpg",
+        "renov-lucsurmer-t5-apres-03.jpg",
+        "renov-lucsurmer-t5-apres-04.jpg",
+        "renov-lucsurmer-t5-apres-05.jpg",
+        "renov-lucsurmer-t5-apres-06.jpg",
+        "renov-lucsurmer-t5-apres-07.jpg",
+        "renov-lucsurmer-t5-apres-08.jpg",
+        "renov-lucsurmer-t5-apres-09.jpg"
+      ]
+    }
+  ]
+}
