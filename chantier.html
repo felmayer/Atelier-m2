@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chantier — L'Atelier M²</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#0d0b08;--brun:#1a1108;--brun2:#2a1f0e;--or:#c8963c;--or2:#e8b45a;--or-soft:rgba(200,150,60,0.12);--creme:#f5f0e8;--creme2:#ede5d4;--blanc:#fdfaf5;--text:#2a1f0e;--text2:#6b5a3e;--border:rgba(200,150,60,0.2);--r:4px;--rl:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--blanc);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2rem;background:rgba(13,11,8,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,150,60,0.15)}
+.logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--or);text-decoration:none}
+.logo span{color:var(--creme)}
+.nav-back{display:flex;align-items:center;gap:8px;color:rgba(245,240,232,.7);text-decoration:none;font-size:.85rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.nav-back:hover{color:var(--or)}
+.nav-cta{background:var(--or);color:var(--noir);padding:.6rem 1.4rem;border-radius:var(--r);font-size:.82rem;font-weight:600;text-decoration:none;letter-spacing:.04em;text-transform:uppercase;transition:all .2s;white-space:nowrap}
+.nav-cta:hover{background:var(--or2)}
+
+/* HERO CHANTIER */
+.chantier-hero{padding:8rem 2rem 4rem;background:var(--brun);text-align:center}
+.chantier-badge{display:inline-flex;align-items:center;gap:8px;background:var(--or-soft);border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-size:.75rem;font-weight:500;color:var(--or);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem}
+.chantier-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,4rem);font-weight:900;color:var(--creme);line-height:1.1;margin-bottom:.75rem}
+.chantier-meta{display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.chantier-meta span{font-size:.85rem;color:rgba(245,240,232,.55);display:flex;align-items:center;gap:6px}
+.chantier-desc{max-width:600px;margin:0 auto;font-size:1rem;color:rgba(245,240,232,.65);line-height:1.7}
+
+/* GALERIE PHOTOS */
+.photos-section{padding:4rem 2rem;background:var(--blanc)}
+.container{max-width:1200px;margin:0 auto}
+.photos-count{font-size:.82rem;color:var(--text2);margin-bottom:1.5rem}
+
+/* Grille principale */
+.photos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1rem}
+.photo-item{position:relative;overflow:hidden;border-radius:var(--rl);background:var(--brun2);cursor:pointer;transition:transform .2s}
+.photo-item:hover{transform:scale(1.01)}
+.photo-item:first-child{grid-column:span 2;aspect-ratio:16/9}
+.photo-item:not(:first-child){aspect-ratio:4/3}
+.photo-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.photo-item:hover img{transform:scale(1.04)}
+.photo-placeholder{width:100%;height:100%;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,var(--brun),var(--brun2));padding:1.5rem;text-align:center}
+.ph-emoji{font-size:2rem}
+.ph-name{font-size:.82rem;color:rgba(245,240,232,.6);font-family:'Playfair Display',serif}
+.ph-hint{font-size:.7rem;color:rgba(245,240,232,.3)}
+
+/* AVANT / APRES */
+.avantapres-section{padding:2rem 0}
+.avantapres-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--text);margin-bottom:1rem;font-weight:600}
+.avantapres-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.avantapres-item{position:relative;border-radius:var(--rl);overflow:hidden}
+.avantapres-item img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.avantapres-placeholder{width:100%;aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--brun),var(--brun2))}
+.avantapres-badge{position:absolute;top:12px;left:12px;padding:5px 14px;border-radius:20px;font-size:.75rem;font-weight:600;letter-spacing:.05em}
+.badge-avant{background:rgba(200,150,60,.9);color:var(--noir)}
+.badge-apres{background:rgba(16,185,129,.9);color:#fff}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.95);flex-direction:column;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox-img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:var(--r)}
+.lightbox-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;opacity:.7;transition:opacity .2s}
+.lightbox-close:hover{opacity:1}
+.lightbox-nav{display:flex;align-items:center;gap:1.5rem;margin-top:1.5rem}
+.lightbox-btn{background:rgba(200,150,60,.2);border:1px solid rgba(200,150,60,.3);color:var(--or);padding:.6rem 1.5rem;border-radius:20px;font-size:.85rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.lightbox-btn:hover{background:rgba(200,150,60,.3)}
+.lightbox-counter{font-size:.82rem;color:rgba(255,255,255,.5)}
+
+/* CTA DEVIS */
+.cta-section{background:var(--brun);padding:4rem 2rem;text-align:center}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.5rem);color:var(--creme);margin-bottom:1rem;font-weight:700}
+.cta-desc{font-size:1rem;color:rgba(245,240,232,.6);max-width:500px;margin:0 auto 2rem;line-height:1.7}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--or);color:var(--noir);padding:1rem 2.5rem;border-radius:var(--r);font-size:.9rem;font-weight:600;text-decoration:none;letter-spacing:.05em;text-transform:uppercase;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--or2);transform:translateY(-2px)}
+.btn-wa{background:#25d366;color:#fff;padding:1rem 2.5rem;border-radius:var(--r);font-size:.9rem;font-weight:600;text-decoration:none;letter-spacing:.05em;text-transform:uppercase;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-wa:hover{opacity:.9;transform:translateY(-2px)}
+
+/* NOMENCLATURE */
+.nomenclature{background:var(--creme2);padding:3rem 2rem}
+.nomen-card{background:var(--blanc);border:1px solid var(--border);border-radius:var(--rl);padding:1.5rem;max-width:800px;margin:0 auto}
+.nomen-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text);margin-bottom:1rem;font-weight:600}
+.nomen-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem}
+.nomen-item{background:var(--creme2);border-radius:var(--r);padding:.875rem;font-size:.82rem}
+.nomen-cat{font-weight:600;color:var(--or);margin-bottom:4px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em}
+.nomen-ex{color:var(--text2);font-family:'Courier New',monospace;font-size:.78rem;line-height:1.5}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.25rem}
+  .photos-grid{grid-template-columns:1fr 1fr}
+  .photo-item:first-child{grid-column:span 2}
+  .avantapres-grid{grid-template-columns:1fr}
+  .cta-btns{flex-direction:column;align-items:center}
+}
+@media(max-width:480px){
+  .photos-grid{grid-template-columns:1fr}
+  .photo-item:first-child{grid-column:span 1}
+}
+</style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  <div class="lightbox-nav">
+    <button class="lightbox-btn" onclick="prevPhoto()">← Précédente</button>
+    <span class="lightbox-counter" id="lightbox-counter">1 / 1</span>
+    <button class="lightbox-btn" onclick="nextPhoto()">Suivante →</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">L'Atelier <span>M²</span></a>
+  <a href="index.html#realisations" class="nav-back">← Toutes les réalisations</a>
+  <a href="index.html#devis" class="nav-cta">Devis gratuit</a>
+</nav>
+
+<!-- HERO -->
+<div class="chantier-hero">
+  <div class="chantier-badge" id="hero-cat">Menuiserie intérieure</div>
+  <h1 class="chantier-title" id="hero-title">Chantier</h1>
+  <div class="chantier-meta">
+    <span>📍 <span id="hero-lieu"></span></span>
+    <span>🏗️ <span id="hero-cat2"></span></span>
+  </div>
+  <p class="chantier-desc" id="hero-desc"></p>
+</div>
+
+<!-- PHOTOS -->
+<section class="photos-section">
+  <div class="container">
+    <p class="photos-count" id="photos-count"></p>
+    <div class="photos-grid" id="photosGrid"></div>
+
+    <!-- AVANT / APRES (affiché si photos avant/apres détectées) -->
+    <div class="avantapres-section" id="avantApresSection" style="display:none">
+      <p class="avantapres-title">Avant / Après</p>
+      <div class="avantapres-grid" id="avantApresGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- NOMENCLATURE (guide pour ajouter photos) -->
+<div class="nomenclature" id="nomenclatureSection">
+  <div class="nomen-card">
+    <p class="nomen-title">📁 Comment ajouter vos photos pour ce chantier</p>
+    <p style="font-size:.85rem;color:var(--text2);margin-bottom:1rem;line-height:1.6">
+      Créez le dossier correspondant dans votre dépôt GitHub et uploadez vos photos en respectant la nomenclature suivante :
+    </p>
+    <div class="nomen-grid">
+      <div class="nomen-item"><p class="nomen-cat">Menuiserie intérieure</p><p class="nomen-ex">photos/mint/[ville-projet]/<br>mint-[ville]-[projet]-01.jpg<br>mint-[ville]-[projet]-avant-01.jpg<br>mint-[ville]-[projet]-apres-01.jpg</p></div>
+      <div class="nomen-item"><p class="nomen-cat">Menuiserie extérieure</p><p class="nomen-ex">photos/mext/[ville-projet]/<br>mext-[ville]-[projet]-01.jpg</p></div>
+      <div class="nomen-item"><p class="nomen-cat">Rénovation</p><p class="nomen-ex">photos/renov/[ville-projet]/<br>renov-[ville]-[projet]-avant-01.jpg<br>renov-[ville]-[projet]-apres-01.jpg</p></div>
+      <div class="nomen-item"><p class="nomen-cat">Locaux pro</p><p class="nomen-ex">photos/pro/[ville-projet]/<br>pro-[ville]-[projet]-01.jpg</p></div>
+    </div>
+    <p style="font-size:.78rem;color:var(--text2);margin-top:1rem;line-height:1.5">
+      ⚠️ Minuscules uniquement · Pas d'espaces · Pas d'accents · Numérotation 01, 02, 03...
+    </p>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2 class="cta-title">Un projet similaire ?</h2>
+  <p class="cta-desc">Contactez-nous pour discuter de votre projet. Devis gratuit et sans engagement — réponse rapide garantie.</p>
+  <div class="cta-btns">
+    <a href="index.html#devis" class="btn-primary">Demander un devis ✦</a>
+    <a href="https://wa.me/33627650396" class="btn-wa" target="_blank">💬 WhatsApp direct</a>
+  </div>
+</div>
+
+<script>
+// Lecture des paramètres URL
+const params = new URLSearchParams(window.location.search);
+const titre = params.get('titre') || 'Chantier';
+const lieu = params.get('lieu') || '';
+const cat = params.get('cat') || '';
+const desc = params.get('desc') || '';
+const photosParam = params.get('photos') || '';
+
+// Mise à jour du hero
+document.getElementById('hero-title').textContent = titre;
+document.getElementById('hero-lieu').textContent = lieu;
+document.getElementById('hero-cat').textContent = cat;
+document.getElementById('hero-cat2').textContent = cat;
+document.getElementById('hero-desc').textContent = desc;
+document.title = titre + ' — L\'Atelier M²';
+
+// Gestion des photos
+const photos = photosParam ? photosParam.split(',').filter(p => p.trim()) : [];
+let currentPhotoIndex = 0;
+
+document.getElementById('photos-count').textContent =
+  photos.length > 0
+    ? photos.length + ' photo' + (photos.length > 1 ? 's' : '') + ' pour ce chantier'
+    : 'Aucune photo disponible — ajoutez vos photos dans le dossier correspondant';
+
+const grid = document.getElementById('photosGrid');
+
+if (photos.length === 0) {
+  // Emplacements vides avec guide
+  const placeholders = [
+    {emoji:'📷', name:'Photo principale (cover)'},
+    {emoji:'🔍', name:'Détail 1'},
+    {emoji:'🔍', name:'Détail 2'},
+    {emoji:'🔍', name:'Vue d\'ensemble'},
+  ];
+  placeholders.forEach((ph, i) => {
+    const div = document.createElement('div');
+    div.className = 'photo-item';
+    if (i === 0) div.style.gridColumn = 'span 2';
+    div.innerHTML = `<div class="photo-placeholder"><span class="ph-emoji">${ph.emoji}</span><span class="ph-name">${ph.name}</span><span class="ph-hint">Ajoutez vos photos dans GitHub</span></div>`;
+    grid.appendChild(div);
+  });
+} else {
+  // Vraies photos
+  const avant = [], apres = [], autres = [];
+  photos.forEach(p => {
+    if (p.includes('-avant-')) avant.push(p);
+    else if (p.includes('-apres-')) apres.push(p);
+    else autres.push(p);
+  });
+
+  const toutes = [...avant, ...apres, ...autres];
+
+  toutes.forEach((src, i) => {
+    const div = document.createElement('div');
+    div.className = 'photo-item';
+    if (i === 0) div.style.gridColumn = 'span 2';
+    div.innerHTML = `<img src="${src}" alt="${titre} — photo ${i+1}" loading="${i===0?'eager':'lazy'}" onerror="this.parentElement.innerHTML='<div class=\\'photo-placeholder\\'><span class=\\'ph-emoji\\'>🖼️</span><span class=\\'ph-name\\'>${src.split('/').pop()}</span><span class=\\'ph-hint\\'>Photo non trouvée</span></div>'">`;
+    div.onclick = () => openLightbox(i, toutes);
+    grid.appendChild(div);
+  });
+
+  // Avant/Après
+  if (avant.length > 0 && apres.length > 0) {
+    document.getElementById('avantApresSection').style.display = 'block';
+    const aaGrid = document.getElementById('avantApresGrid');
+    const avantDiv = document.createElement('div');
+    avantDiv.className = 'avantapres-item';
+    avantDiv.innerHTML = `<img src="${avant[0]}" alt="Avant"><span class="avantapres-badge badge-avant">AVANT</span>`;
+    const apresDiv = document.createElement('div');
+    apresDiv.className = 'avantapres-item';
+    apresDiv.innerHTML = `<img src="${apres[0]}" alt="Après"><span class="avantapres-badge badge-apres">APRÈS</span>`;
+    aaGrid.appendChild(avantDiv);
+    aaGrid.appendChild(apresDiv);
+  }
+
+  // Masquer guide nomenclature si on a des photos
+  document.getElementById('nomenclatureSection').style.display = 'none';
+}
+
+// LIGHTBOX
+function openLightbox(index, photosList) {
+  currentPhotoIndex = index;
+  window._lightboxPhotos = photosList;
+  document.getElementById('lightbox-img').src = photosList[index];
+  document.getElementById('lightbox-counter').textContent = (index+1) + ' / ' + photosList.length;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+  if (!e || e.target === document.getElementById('lightbox') || e.target.className === 'lightbox-close') {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+function prevPhoto() {
+  const photos = window._lightboxPhotos || [];
+  currentPhotoIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
+  document.getElementById('lightbox-img').src = photos[currentPhotoIndex];
+  document.getElementById('lightbox-counter').textContent = (currentPhotoIndex+1) + ' / ' + photos.length;
+}
+
+function nextPhoto() {
+  const photos = window._lightboxPhotos || [];
+  currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+  document.getElementById('lightbox-img').src = photos[currentPhotoIndex];
+  document.getElementById('lightbox-counter').textContent = (currentPhotoIndex+1) + ' / ' + photos.length;
+}
+
+// Navigation clavier
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') prevPhoto();
+  if (e.key === 'ArrowRight') nextPhoto();
+  if (e.key === 'Escape') closeLightbox({target: document.getElementById('lightbox')});
+});
+</script>
+</body>
+</html>
